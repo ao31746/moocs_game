@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>柔道策略</title>
+		<meta charset="utf-8">	
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">價格:</label>
+			  <div class="col-3">
+				<input class="form-control" type="number" placeholder="價格" id="price" min="1">
+			  </div>
+			</div>			
+			<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">數量:</label>
+			  <div class="col-3">
+				<input class="form-control" type="number" placeholder="數量(1~100)" id="quantity" min="1" max="100">
+			  </div>
+			</div>
+			
+			<button class='btn btn-primary' id='confrim'>確認</button>
+			
+			<div id="result_1"></div>
+		</div>		
+	</body>
+	
+	<script>
+		var oldCost = 100, newCost = 120, oldMaxPrice = 200, newMaxPrice = 160;
+		var entryCost = 100, customerNumber = 100;
+		var quantity, price, oldMaxPriceProfit, oldUndercutPriceProfit, loss, newProfit
+		var record = {};
+		
+		$( "#confrim" ).click(function() {
+			quantity = $("#quantity").val();
+			price =  parseInt($("#price").val());
+			if(quantity<1 || quantity>100 || price<=0)
+			{
+				alert("請輸入價格>0，數量於1~100");
+			}
+			else
+			{
+				record['quantity'] = quantity;
+				record['price'] = price;
+				if (price > newMaxPrice)
+				{
+					loss = entryCost;
+					$( "#result_1" ).html( "很不幸的，由於定價過高，沒人買你的商品，虧了 " +loss +" 元，只好退出市場。");
+					record_result();
+				}
+				else
+				{
+					oldMaxPriceProfit = (oldMaxPrice - oldCost) * (customerNumber - quantity);
+					//計算舊廠商訂最高價的利潤，(最高價-成本) * 沒被新廠搶走的買家
+					oldUndercutPriceProfit = (price + 40 - oldCost) * customerNumber;
+					console.log(oldMaxPriceProfit+","+oldUndercutPriceProfit);
+					//計算舊廠商定價比新廠商低一元的利潤
+					if (oldMaxPriceProfit > oldUndercutPriceProfit)
+						//如果定價最高價的利潤較高，老廠商決定訂高價，容許新廠生存空間
+					{
+						newProfit = ((price - newCost) * quantity) - entryCost;
+						//新廠商利潤
+						if (newProfit >= 0)
+						{
+							$( "#result_1" ).html( "恭喜你成功打入市場！且賺了 " + newProfit + " 元。\n");
+							record_result();
+						}
+						else
+						{
+							loss = Math.abs(newProfit);
+							$( "#result_1" ).html("雖然你成功進入市場賣出商品，但卻虧了 " + loss + " 元，下次記得進入成本要算進去喔～");
+							record_result();
+						}
+					}
+					if (oldMaxPriceProfit <= oldUndercutPriceProfit)
+					{
+						$( "#result_1" ).html("老廠商降價搶市場，你什麼都沒賣出去，虧損了 " + entryCost + " 元。");
+						record_result();
+					}
+				}
+			}
+			
+			//sleep 2 seconds to think
+		});
+		
+		
+		function record_result()
+		{
+			console.log(record);
+			//add ajax here
+			
+		}
+	</script>
+	<style>
+		.container{
+			margin-top:5%;
+		}
+    </style>
+</html>
+

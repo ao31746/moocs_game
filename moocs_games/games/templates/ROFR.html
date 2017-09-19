@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ROFR</title>
+		<meta charset="utf-8">	
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div id = ROFR_1 class="col">
+					<h2>
+						第一回合 - NBC擁有優先權
+					</h2>
+					
+					<p id="NBC_price"></p>
+					
+					<button class='btn btn-primary NBC_Bu' id='NBC_accept'> 接受</button>
+					<button class='btn btn-primary NBC_Bu' id='NBC_reject'> 拒絕</button>
+					
+					<p id="CBS_price"></p>
+					
+					<button class='btn btn-primary CBS_Bu' id='CBS_accept'> 接受</button>
+					<button class='btn btn-primary CBS_Bu' id='CBS_reject'> 拒絕</button>
+					
+					<p id ="result"></p>
+				</div>
+				
+				<div id = ROFR_2 class="col">
+					<h2>
+						第二回合 - NBC沒有優先權。
+					</h2>
+					
+					<p id="NBC_price_2"></p>
+					
+					<button class='btn btn-primary NBC_Bu_2' id='NBC_accept_2'> 接受</button>
+					<button class='btn btn-primary NBC_Bu_2' id='NBC_reject_2'> 拒絕</button>
+					
+					<p id="CBS_price_2"></p>
+					
+					<button class='btn btn-primary CBS_Bu_2' id='CBS_accept_2'> 接受</button>
+					<button class='btn btn-primary CBS_Bu_2' id='CBS_reject_2'> 拒絕</button>
+					
+					<p id ="result_2"></p>
+				</div>
+			</div>
+		</div>		
+	</body>
+	
+	<script>
+		var record ={};
+		var min = 500;
+		var max = 700;
+		// and the formula is:
+		var NBC_price = Math.floor(Math.random() * (max - min + 1)) + min;
+		var CBS_price, NBC_price_2, CBS_price_2;
+		$(document).ready(function() {
+			first_round();
+		});
+		function first_round()
+		{
+			record['NBC_price_1'] = NBC_price;
+			$( "#NBC_price" ).append( "第一階段：NBC出價"+NBC_price+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			
+			$( "#NBC_accept" ).click(function() {
+				record['round_1_step_1'] = true;
+				$( "#ROFR_1" ).append( "<br/>交易成立，賺了 "+NBC_price+" 萬元。此回合結束，進入第二回合。");
+				disable();
+				second_round();
+			});
+			
+			$( "#NBC_reject" ).click(function() {
+				record['round_1_step_1'] = false;
+				disable();				
+				// and the formula is:
+				var max_2 = 980
+				CBS_price = Math.floor(Math.random() * (max_2 - NBC_price + 1)) + NBC_price;
+				record['CBS_price_1'] = CBS_price;
+				$( ".CBS_Bu" ).css("display", " inline-block");
+				$( ".CBS_Bu" ).prop('disabled', false);
+				$( "#CBS_price" ).append( "第二階段：CBS出價"+CBS_price+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			});
+			
+			$( "#CBS_accept" ).click(function() {
+				record['round_1_step_2'] = true;
+				disable();
+				if(CBS_price>NBC_price)
+				{
+					$( "#result" ).append( "恭喜！你與CBS的合約成立，賺了 "+CBS_price+" 萬元。");
+				}
+				else
+				{
+					$( "#result" ).append( "進入第三階段，NBC決定以 "+CBS_price+" 萬元與你成交！");
+				}
+				second_round();
+			});
+			
+			
+			$( "#CBS_reject" ).click(function() {
+				record['round_1_step_2'] = false;
+				disable();
+				$( "#result" ).append( "談判破裂，你沒有達成任何協議，賺了 0 元。");
+				second_round()
+			});
+		}
+		
+		function disable(){
+			$(':input').prop('disabled', true);
+			//$('#NBC_reject').prop('disabled', true);
+		}
+		
+		function second_round()
+		{
+			$("#ROFR_1").append("<hr>");
+			var max_2 = 300;
+			var min_2 = 600;
+			NBC_price_2 = Math.floor(Math.random() * (max_2 - min_2 + 1)) + min_2;
+			
+			record['NBC_price_2'] = NBC_price_2;
+			$( "#ROFR_2" ).css("display", "block");
+			$( "#NBC_price_2" ).append( "第一階段：NBC出價"+NBC_price_2+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			
+			$( ".CBS_Bu_2" ).css("display", "none");
+			$( ".NBC_Bu_2" ).prop('disabled', false);
+			
+			$( "#NBC_accept_2" ).click(function() {
+				record['round_2_step_1'] = true;
+				$( "#result_2" ).append( "<br/>交易成立，賺了 "+NBC_price_2+" 萬元。");
+				disable();
+				record_result();
+			});
+			
+			$( "#NBC_reject_2" ).click(function() {
+				record['round_2_step_1'] = false;
+				disable();
+				
+				// and the formula is:
+				var min_2_2 = 1
+				var max_2_2 = 100
+				CBS_price_2 = Math.floor(Math.random() * (max_2_2 - min_2_2 + 1)) + min_2_2;
+				record['CBS_price_2'] = CBS_price_2;
+				$( ".CBS_Bu_2" ).css("display", " inline-block");
+				$( ".CBS_Bu_2" ).prop('disabled', false);
+				$( "#CBS_price_2" ).append( "第二階段：CBS出價"+CBS_price_2+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			});
+			
+			$( "#CBS_accept_2" ).click(function() {
+				record['round_2_step_2'] = true;
+				disable();
+				$( "#result_2" ).append( "恭喜！你與CBS的合約成立，賺了 "+CBS_price_2+" 萬元。");
+				record_result();
+			});
+			$( "#CBS_reject_2" ).click(function() {
+				record['round_2_step_2'] = false;
+				disable();
+				$( "#result_2" ).append( "談判破裂，你什麼都沒賺到！發現優先權其實不一定是壞事了嗎？");
+				record_result();
+			});
+		}
+		function record_result()
+		{
+			$( "#result_2" ).append( "<hr>");
+			console.log(record);
+			//add ajax here
+			
+		}
+	</script>
+	<style>
+		.CBS_Bu, #ROFR_2, CBS_Bu_2{
+			display:none;
+		}
+		.container{
+			margin-top:5%;
+		}
+    </style>
+</html>
+
