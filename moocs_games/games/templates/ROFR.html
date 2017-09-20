@@ -69,14 +69,14 @@
 			$( "#NBC_price" ).append( "第一階段：NBC出價"+NBC_price+"萬美金。<br/>此階段你可以選擇接受或拒絕");
 			
 			$( "#NBC_accept" ).click(function() {
-				record['round_1_step_1'] = true;
+				record['round_1_step_1'] = 1;
 				$( "#ROFR_1" ).append( "<br/>交易成立，賺了 "+NBC_price+" 萬元。此回合結束，進入第二回合。");
 				disable();
 				second_round();
 			});
 			
 			$( "#NBC_reject" ).click(function() {
-				record['round_1_step_1'] = false;
+				record['round_1_step_1'] = 0;
 				disable();				
 				// and the formula is:
 				var max_2 = 980
@@ -88,7 +88,7 @@
 			});
 			
 			$( "#CBS_accept" ).click(function() {
-				record['round_1_step_2'] = true;
+				record['round_1_step_2'] = 1;
 				disable();
 				if(CBS_price>NBC_price)
 				{
@@ -103,7 +103,7 @@
 			
 			
 			$( "#CBS_reject" ).click(function() {
-				record['round_1_step_2'] = false;
+				record['round_1_step_2'] = 0;
 				disable();
 				$( "#result" ).append( "談判破裂，你沒有達成任何協議，賺了 0 元。");
 				second_round()
@@ -130,14 +130,14 @@
 			$( ".NBC_Bu_2" ).prop('disabled', false);
 			
 			$( "#NBC_accept_2" ).click(function() {
-				record['round_2_step_1'] = true;
+				record['round_2_step_1'] = 1;
 				$( "#result_2" ).append( "<br/>交易成立，賺了 "+NBC_price_2+" 萬元。");
 				disable();
 				record_result();
 			});
 			
 			$( "#NBC_reject_2" ).click(function() {
-				record['round_2_step_1'] = false;
+				record['round_2_step_1'] = 0;
 				disable();
 				
 				// and the formula is:
@@ -146,18 +146,18 @@
 				CBS_price_2 = Math.floor(Math.random() * (max_2_2 - min_2_2 + 1)) + min_2_2;
 				record['CBS_price_2'] = CBS_price_2;
 				$( ".CBS_Bu_2" ).css("display", " inline-block");
-				$( ".CBS_Bu_2" ).prop('disabled', false);
+				$( ".CBS_Bu_2" ).prop('disabled', 0);
 				$( "#CBS_price_2" ).append( "第二階段：CBS出價"+CBS_price_2+"萬美金。<br/>此階段你可以選擇接受或拒絕");
 			});
 			
 			$( "#CBS_accept_2" ).click(function() {
-				record['round_2_step_2'] = true;
+				record['round_2_step_2'] = 1;
 				disable();
 				$( "#result_2" ).append( "恭喜！你與CBS的合約成立，賺了 "+CBS_price_2+" 萬元。");
 				record_result();
 			});
 			$( "#CBS_reject_2" ).click(function() {
-				record['round_2_step_2'] = false;
+				record['round_2_step_2'] = 0;
 				disable();
 				$( "#result_2" ).append( "談判破裂，你什麼都沒賺到！發現優先權其實不一定是壞事了嗎？");
 				record_result();
@@ -173,7 +173,7 @@
 			var form_data = new FormData();
 
 			for ( var key in record ) {
-			    form_data.append(key, record[key]);
+			    form_data.append(String(key), record[key]);
 			}
 			jQuery(document).ajaxSend(function(event, xhr, settings) {
 			    function getCookie(name) {
