@@ -38,7 +38,7 @@
 		var record = {};
 		
 		$( "#confrim" ).click(function() {
-			quantity = $("#quantity").val();
+			quantity = parseInt($("#quantity").val());
 			price =  parseInt($("#price").val());
 			if(quantity<1 || quantity>100 || price<=0)
 			{
@@ -46,8 +46,8 @@
 			}
 			else
 			{
-				record['quantity'] = quantity;
-				record['price'] = price;
+				record['quantity'] = String(quantity);
+				record['price'] = String(price);
 				if (price > newMaxPrice)
 				{
 					loss = entryCost;
@@ -59,7 +59,7 @@
 					oldMaxPriceProfit = (oldMaxPrice - oldCost) * (customerNumber - quantity);
 					//計算舊廠商訂最高價的利潤，(最高價-成本) * 沒被新廠搶走的買家
 					oldUndercutPriceProfit = (price + 40 - oldCost) * customerNumber;
-					console.log(oldMaxPriceProfit+","+oldUndercutPriceProfit);
+					// console.log(oldMaxPriceProfit+","+oldUndercutPriceProfit);
 					//計算舊廠商定價比新廠商低一元的利潤
 					if (oldMaxPriceProfit > oldUndercutPriceProfit)
 						//如果定價最高價的利潤較高，老廠商決定訂高價，容許新廠生存空間
@@ -92,9 +92,57 @@
 		
 		function record_result()
 		{
-			console.log(record);
-			//add ajax here
-			
+
+			var form_data = new FormData();
+
+			for ( var key in record ) {
+			    form_data.append(key, record[key]);
+			}
+			jQuery(document).ajaxSend(function(event, xhr, settings) {
+			    function getCookie(name) {
+			        var cookieValue = null;
+			        if (document.cookie && document.cookie != '') {
+			            var cookies = document.cookie.split(';');
+			            for (var i = 0; i < cookies.length; i++) {
+			                var cookie = jQuery.trim(cookies[i]);
+			                // Does this cookie string begin with the name we want?
+			                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+			                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+			                    break;
+			                }
+			            }
+			        }
+			        return cookieValue;
+			    }
+			    function sameOrigin(url) {
+			        // url could be relative or scheme relative or absolute
+			        var host = document.location.host; // host + port
+			        var protocol = document.location.protocol;
+			        var sr_origin = '//' + host;
+			        var origin = protocol + sr_origin;
+			        // Allow absolute or scheme relative URLs to same origin
+			        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+			            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+			            // or any other URL that isn't scheme relative or absolute i.e relative.
+			            !(/^(\/\/|http:|https:).*/.test(url));
+			    }
+			    function safeMethod(method) {
+			        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+			    }
+			 
+			    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+			        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+			    }
+			});
+			$.ajax({
+			    url         : 'http://127.0.0.1:8000/api/JUDO/',
+			    data        : form_data,
+			    processData : false,
+			    contentType : false,
+			    type: 'POST'
+			}).done(function(data){
+			    console.log("add success")
+			});
 		}
 	</script>
 	<style>

@@ -23,5 +23,5 @@ class JUDO_model(models.Model):
     last_modify_date = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    class JUDO:
+    class Meta:
         db_table = "game_JUDO"
