@@ -211,6 +211,7 @@
 			        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
 			    }
 			});
+			console.log("ajax")
 			$.ajax({
 			    url         : 'http://127.0.0.1:8000/api/ROFR/',
 			    data        : form_data,
