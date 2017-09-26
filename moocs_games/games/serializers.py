@@ -19,7 +19,7 @@ class Company_Merger_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Company_Merger_model
         # fields = '__all__'
-        fields = ('company_value', 'input_price', 'quantity', 'input_price')
+        fields = ('company_value', 'input_price', 'profit')
 
 class Price_War_Serializer(serializers.ModelSerializer):
     class Meta:
