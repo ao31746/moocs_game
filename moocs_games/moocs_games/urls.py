@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from games.views import ROFR, JUDO,Company_Merger,Price_War
+from games.views import ROFR, JUDO,Company_Merger,Price_War, jump
 from rest_framework.routers import DefaultRouter
 from games import views
 
@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^JUDO/', JUDO),
     url(r'^Price_War/', Price_War),
     url(r'^Company_Merger/', Company_Merger),
+    url(r'^jump/', jump),
     url(r'^api/', include(router.urls))
 ]

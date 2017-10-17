@@ -21,7 +21,10 @@ def Price_War(request):
         'data': "Hello Django ",
     })
 
-
+def jump(request):
+    return render(request, 'jump.html', {
+        'data': "Hello Django ",
+    })
 
 class ROFR_ViewSet(viewsets.ModelViewSet):
     queryset = ROFR_model.objects.all()
