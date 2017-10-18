@@ -7,37 +7,49 @@
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 	</head>
 
 	<body>
 		<div class="container">
-			<div class="form-group row">
-			  <label for="example-text-input" class="col-2 col-form-label">價格:</label>
-			  <div class="col-3">
+		<div id ="start">
+			<h1>柔道策略詳細規則</h1>
+<p>在某個市場中，有一個老廠商獨佔整個市場，並且產能足夠供應所有顧客。而你<br />是個剛起步的創業家，打算進入這個市場。<br />在市場中共有100個顧客，只要價格不超過他們的願付價格，他們都會購買商品<br />。由於老廠商長久耕耘市場，建立品牌價值與信任度，顧客對老廠商產品的願付價格<br />是200元，而你名不見經傳，因此顧客只願意支付160元的產品購買你的商品。老廠商<br />有豐富的生產經驗，降低成本，因此老廠商每個商品的成本只需要100 元；而你剛開<br />始生產，仍然有很多流程不甚順利，因此每個商品的成本是120元，此外，你還有進<br />入成本100元。<br />顧客則選擇能帶給他們最多效益的廠商購買，假設你與老廠商都出價120元，那<br />個購 買你的產品的效益是160 - 120 = 40元，跟老廠商購買的效益則是200 &ndash; 120 =<br />80。因此在這情況下顧客會跟老廠商購買。<br /><br />這個實驗共有三階段。<br /><br /><b>第一階段</b><br />新廠商（也就是你）決定產量與商品價格。<br /><br /><b>第二階段</b><br />老廠商會根據你剛剛的出價與產量，決定自己的產品定價。<br /><br /><b>第三階段</b><br />顧客根據老廠商和新廠商的定價，選擇購買對自己效益最高的商品。</p>
+			<button class='btn btn-primary' id="get_start">閱讀完畢，準備開始</button>
+		</div>
+		<div id = "game" class = "row game">
+			<div class="form-group col-4">
+			  <label for="example-text-input" class="col-4 col-form-label">價格:</label>
+			  <div class="col-8">
 				<input class="form-control" type="number" placeholder="價格" id="price" min="1">
 			  </div>
-			</div>			
-			<div class="form-group row">
-			  <label for="example-text-input" class="col-2 col-form-label">數量:</label>
-			  <div class="col-3">
+			</div>
+
+			<div class="form-group col-4">
+			  <label for="example-text-input" class="col-4 col-form-label">數量:</label>
+			  <div class="col-8">
 				<input class="form-control" type="number" placeholder="數量(1~100)" id="quantity" min="1" max="100">
 			  </div>
 			</div>
-			
-			<button class='btn btn-primary' id='confrim'>確認</button>
-			
-			<div id="result_1"></div>
-		</div>		
+
+			<div id="result_1"></div>	
+		</div>	
+		<div class = "game"><button class='btn btn-primary' id='confirm'>確認</button></div>
+		
 	</body>
 	
 	<script>
+		$( "#get_start" ).click(function() {
+			$(".game").css("display","flex");
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+		});
 		var oldCost = 100, newCost = 120, oldMaxPrice = 200, newMaxPrice = 160;
 		var entryCost = 100, customerNumber = 100;
 		var quantity, price, oldMaxPriceProfit, oldUndercutPriceProfit, loss, newProfit
 		var record = {};
 		
-		$( "#confrim" ).click(function() {
+		$( "#confirm" ).click(function() {
 			quantity = parseInt($("#quantity").val());
 			price =  parseInt($("#price").val());
 			if(quantity<1 || quantity>100 || price<=0)
@@ -148,6 +160,17 @@
 	<style>
 		.container{
 			margin-top:5%;
+		}
+		#start{
+			margin-left: 1%;
+			margin-bottom:5%;
+		}
+		.game{
+			display:none;
+			height: 150px;
+		}
+		#confirm{
+			height:40px;
 		}
     </style>
 </html>
