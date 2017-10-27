@@ -12,7 +12,39 @@
 
 	<body>
 		<div class="container">
+			<div class=WordSection1>
+
+			<p class=MsoNormal align=center style='text-align:center'><b><span
+			style='font-family:新細明體'>公司併購詳細規則</span></b></p>
+
+			<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; </span><span style='font-family:
+			新細明體'>在這個情境裡，我有一家公司正在尋找買家，而你是唯一的可能買家，亦即沒有人與你競爭。另外，你有技術在手，只要買下公司，就能改善公司生產流程，使生產力增加</span><span
+			lang=EN-US>50%</span><span style='font-family:新細明體'>，利潤也會因此增加</span><span
+			lang=EN-US>50%</span><span style='font-family:新細明體'>。假設我手裡利潤是</span><span
+			lang=EN-US>50</span><span style='font-family:新細明體'>萬，在你手裡利潤就會變成</span><span
+			lang=EN-US>75</span><span style='font-family:新細明體'>萬，依此類推。但是，即使你確知能提升公司生產力</span><span
+			lang=EN-US>50%</span><span style='font-family:新細明體'>，卻不知道公司目前生產力是多少。然而，你知道這家公司在我手上只可能產生</span><span
+			lang=EN-US>0~100</span><span style='font-family:新細明體'>萬的利潤，這個利潤是在</span><span
+			lang=EN-US>0~100</span><span style='font-family:新細明體'>萬的區間中均勻分布的。</span></p>
+
+			<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+			<p class=MsoNormal><span style='font-family:新細明體'>你能出價的區間在</span><span
+			lang=EN-US>0~150</span><span style='font-family:新細明體'>萬，</span><span
+			lang=EN-US>0</span><span style='font-family:新細明體'>就代表不買。你出價後，我會根據公司的實際估值資訊決定賣或不賣。</span></p>
+
+			<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+			
+			<button class='btn btn-primary' id="start">閱讀完畢，準備開始</button>
+			</div>
+
+
+			<p id = space></p>
+			<p id = space1></p>
 			<div class="row">
+
+
 				<div id = ROFR_1 class="col-8">
 					<h2>
 						公司併購
@@ -21,70 +53,102 @@
 					<label for="example-text-input" class="col-2 col-form-label">出價:</label>
 
 			  		<div class="col-3">
-						<input class="form-control" type="number" placeholder="價格(1~150萬)" id="price" min="1" max="150">
+						<input class="form-control" type="number" placeholder="價格(0~150萬)" id="price" min="1" max="150">
 			  			<p></p>
 			  			<button class='btn btn-primary' id='confrim'>確認</button>
-			  			<div id="result"></div>
 			  		</div>
-
 				</div>
 				
+
 				<div id = ROFR_2 class="col-4">
 					<h2>
 						圖示
 					</h2>
 					<div id="result1"></div>
 					<canvas id="myCanvas" width="300" height="400"></canvas>
+					<div id="result"></div>
+					<button class='btn btn-primary' id="again">再玩一次</button>
 				</div>
+
+
 			</div>
 		</div>		
 	</body>
 	
 	<script>
+		//=======================================================
+		
+		//=======================================================
+
 		var record ={};
 		var company_value = Math.floor(Math.random() * (101));
 		//var price = $("#price").val();
+			$( "#again" ).click(function() {
 
-
-		//=======================================================
-		$(document).ready(function() {
-			companyMerge();
-		});
-		//=======================================================
-		function companyMerge()
-		{
+				$("#ROFR_2").css("display","none");
+				$("#again").css("display","none");
+				$(':input').prop('disabled', false);
+				$("#confirm").prop('disabled', false);
+				$( "#result" ).html("")
+				$( "#result1" ).html("")
+				var canvas = $('#myCanvas')[0]; // or document.getElementById('canvas');
+				canvas.width = canvas.width;
+			});
+		
+		
 			
-			$( "#confrim" ).click(function() {
-				
-				
-				price = $("#price").val();
-				record['input_price'] = price;
-				record['company_value'] = company_value;
-				disable();
+			$( "#start" ).click(function() {
+				$("#ROFR_1").css("display","inline-block");
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+			});
 
-				if(company_value >= price)
+
+			$( "#confrim" ).click(function() 
+			{
+				
+				//calculate the profit
+				price = $("#price").val();
+
+				if(price<=0 || price>=150)
 				{
-					$( "#result" ).append( "此公司價值實際為 "+company_value+" 元，賣家決定自己營運。");
-					record['profit'] = 0;
-				}
-				else
-				{
-					var profit = company_value * 1.5 - price;
-					record['profit'] = profit;
-					if (profit >= 0)
+				alert("請輸入價格於0~150");
+				} 
+				else{
+					record['input_price'] = price;
+					record['company_value'] = company_value;
+					disable();
+
+					if(company_value >= price)
 					{
-						$( "#result" ).append( "你買到了實際價值為 "+company_value+" 元的公司，賺了 "+profit);
+						$( "#result" ).append( "公司價值實際為 "+company_value+" 元，超過你出價，公司決定不賣。");
+						record['profit'] = 0;
 					}
-					else{
-						var loss = Math.abs(profit);
-						$( "#result" ).append( "你買到了實際價值為 "+company_value+" 元的公司，虧了 "+profit+ " 元。");
+					else
+					{
+						var profit = company_value * 1.5 - price;
+						record['profit'] = profit;
+						if (profit >= 0)
+						{
+							$( "#result" ).append( "你買到了實際價值為 "+company_value+" 元的公司，賺了 "+profit+ " 元。");
+						}
+						else{
+							profit = profit*(-1)
+							var loss = Math.abs(profit);
+							$( "#result" ).append( "你買到了實際價值為 "+company_value+" 元的公司，虧了 "+profit+ " 元。");
+						}
 					}
-				}
+				
+
+				
+				$( "#result" ).css("display","inline-block");
+				$('#again').prop('disabled', false);
+				$("#again").css("display","inline-block");
+
 				var ptn_with_y_axis = 0-price
 				var ptn_highest_y = price*(0.5)
 				$( "#ROFR_2" ).css("display", " inline-block");
-				$( "#result1" ).append( "Y軸交點 (0,"+ ptn_with_y_axis +"), peak (" +price+ ","+ptn_highest_y+" )");
-
+				$( "#result1" ).append( "Y軸交點 (0,"+ ptn_with_y_axis +"), peak (" +price+ ","+ptn_highest_y+" )<br>(X軸為公司實際價值，Y軸為獲利)");
+				//====================drawXAxis========================
 				Graph.prototype.drawXAxis = function() {
 		        var context = this.context;
 		        context.save();
@@ -128,7 +192,30 @@
 		        context.restore();
 		      };
 
-		      Graph.prototype.drawYAxis = function() {
+		      	//==========drawDot================
+		      	Graph.prototype.drawDot = function(equation, color, thickness) {
+		        var context = this.context;
+		        context.save();
+		        context.save();
+		        this.transformContext();
+
+		        context.beginPath();
+		        context.moveTo(company_value, equation(company_value));
+		        //context.moveTo(company_value, equation(company_value));
+		        for(var x = company_value; x <= company_value+1; x += this.iteration) {
+		          context.lineTo(x, equation(x));
+		        }
+		        //=======================
+
+		        context.restore();
+		        context.lineJoin = 'round';
+		        context.lineWidth = thickness;
+		        context.strokeStyle = color;
+		        context.stroke();
+		        context.restore();
+		      };
+		      	//================drawYAxis==========================
+		      	Graph.prototype.drawYAxis = function() {
 		        var context = this.context;
 		        context.save();
 		        context.beginPath();
@@ -171,7 +258,8 @@
 		        context.restore();
 		      };
 
-		      Graph.prototype.drawEquation = function(equation, color, thickness) {
+		      	//====================drawEquation========================
+		      	Graph.prototype.drawEquation = function(equation, color, thickness) {
 		        var context = this.context;
 		        context.save();
 		        context.save();
@@ -192,19 +280,20 @@
 		        context.stroke();
 		        context.restore();
 		      };
-		      Graph.prototype.drawDot = function(equation, color, thickness) {
+		      	//======================Draw Verticle Line===========================
+		      	Graph.prototype.drawVerticleLine = function(equation, color, thickness) {
 		        var context = this.context;
 		        context.save();
 		        context.save();
 		        this.transformContext();
 
 		        context.beginPath();
-		        context.moveTo(company_value, equation(company_value));
-		        //context.moveTo(company_value, equation(company_value));
-		        for(var x = company_value; x <= company_value+1; x += this.iteration) {
-		          context.lineTo(x, equation(x));
+		        context.moveTo(equation(this.minY),this.minY);
+
+		        price = $("#price").val();
+		        for(var y = this.minY + this.iteration; y <= this.maxY; y += 30*this.iteration) {
+		          context.lineTo(equation(y),y);
 		        }
-		        //=======================
 
 		        context.restore();
 		        context.lineJoin = 'round';
@@ -213,8 +302,8 @@
 		        context.stroke();
 		        context.restore();
 		      };
-
-		      Graph.prototype.transformContext = function() {
+		    	//====================transformContext========================
+		      	Graph.prototype.transformContext = function() {
 		        var context = this.context;
 
 		        // move context to center of canvas
@@ -227,6 +316,7 @@
 		         */
 		        context.scale(this.scaleX, -this.scaleY);
 		      };
+		      //====================transformContext========================
 		      var myGraph = new Graph({
 		        canvasId: 'myCanvas',
 		        minX: 0,
@@ -240,15 +330,18 @@
 		      myGraph.drawEquation(function(x) {
 		        return (-1)*price + (1.5)*x;
 		      }, 'green', 3);
+		      //=================draw the straight line===================
+		      myGraph.drawVerticleLine(function(y) {
+		        return company_value;},'blue', 1)
+		      
+		      
 		      myGraph.drawDot(function(x) {
 		        return (-1)*price + (1.5)*x;
 		      }, 'red', 5);
 
-		      record_result();
-			});
-
-
+		      record_result();  
 		}
+		});//end of button click
 
 		function disable(){
 			$(':input').prop('disabled', true);
@@ -265,35 +358,35 @@
 		}
 		//===================Graph========================
 		function Graph(config) {
-        // user defined properties
-        this.canvas = document.getElementById(config.canvasId);
-        this.minX = config.minX;
-        this.minY = config.minY;
-        this.maxX = config.maxX;
-        this.maxY = config.maxY;
-        this.unitsPerTick = config.unitsPerTick;
+	        // user defined properties
+	        this.canvas = document.getElementById(config.canvasId);
+	        this.minX = config.minX;
+	        this.minY = config.minY;
+	        this.maxX = config.maxX;
+	        this.maxY = config.maxY;
+	        this.unitsPerTick = config.unitsPerTick;
 
-        // constants
-        this.axisColor = '#aaa';
-        this.font = '8pt Calibri';
-        this.tickSize = 20;
+	        // constants
+	        this.axisColor = '#aaa';
+	        this.font = '8pt Calibri';
+	        this.tickSize = 20;
 
-        // relationships
-        this.context = this.canvas.getContext('2d');
-        this.rangeX = this.maxX - this.minX;
-        this.rangeY = this.maxY - this.minY;
-        this.unitX = this.canvas.width / this.rangeX;
-        this.unitY = this.canvas.height / this.rangeY;
-        this.centerY = Math.round(Math.abs(this.minY / this.rangeY) * this.canvas.height);
-        this.centerX = Math.round(Math.abs(this.minX / this.rangeX) * this.canvas.width);
-        this.iteration = (this.maxX - this.minX) / 1000;
-        this.scaleX = this.canvas.width / this.rangeX;
-        this.scaleY = this.canvas.height / this.rangeY;
+	        // relationships
+	        this.context = this.canvas.getContext('2d');
+	        this.rangeX = this.maxX - this.minX;
+	        this.rangeY = this.maxY - this.minY;
+	        this.unitX = this.canvas.width / this.rangeX;
+	        this.unitY = this.canvas.height / this.rangeY;
+	        this.centerY = Math.round(Math.abs(this.minY / this.rangeY) * this.canvas.height);
+	        this.centerX = Math.round(Math.abs(this.minX / this.rangeX) * this.canvas.width);
+	        this.iteration = (this.maxX - this.minX) / 1000;
+	        this.scaleX = this.canvas.width / this.rangeX;
+	        this.scaleY = this.canvas.height / this.rangeY;
 
-        // draw x and y axis
-        this.drawXAxis();
-        this.drawYAxis();
-      }
+	        // draw x and y axis
+	        this.drawXAxis();
+	        this.drawYAxis();
+      	}
 
       function record_result()
 		{
@@ -349,15 +442,13 @@
 			    console.log("add success")
 			});
 		}
-
-      
       // myGraph.drawEquation(function(x) {
       //   return (1/4)*x + (1/4)*price;
       // }, 'green', 3);
 		//===================End of Graph========================
 	</script>
 	<style>
-		#ROFR_2{
+		#ROFR_1,#ROFR_2,#result,#again{
 			display:none;
 		}
 		.container{
