@@ -25,4 +25,17 @@ class Price_War_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Price_War_model
         # fields = '__all__'
-        fields = ('round1_input_price', 'round1_profit', 'round1_quantity', 'round2_input_price', 'round2_profit', 'round2_quantity', 'round3_input_price', 'round3_profit', 'round3_quantity')
+        fields = ('round1_input_price', 'round1_profit', 'round1_quantity', 'round2_input_price', 'round2_profit', 'round2_quantity', 'round3_input_price', 'round3_profit', 'round3_quantity',
+            'round1_input_price_of_enemy1','round3_quantity_of_enemy1','round1_profit_of_enemy1',
+            'round2_input_price_of_enemy1','round2_quantity_of_enemy1','round2_profit_of_enemy1',
+            'round2_input_price_of_enemy2','round2_quantity_of_enemy2','round2_profit_of_enemy2',
+            'round2_input_price_of_enemy3','round2_quantity_of_enemy3','round2_profit_of_enemy3',
+            'round3_input_price_of_enemy1','round3_quantity_of_enemy1','round3_profit_of_enemy1',
+            'round3_input_price_of_enemy2','round3_quantity_of_enemy2','round3_profit_of_enemy2',
+            'round3_input_price_of_enemy3','round3_quantity_of_enemy3','round3_profit_of_enemy3',
+            'round3_input_price_of_enemy4','round3_quantity_of_enemy4','round3_profit_of_enemy4',
+            'round3_input_price_of_enemy5','round3_quantity_of_enemy5','round3_profit_of_enemy5',
+            'round3_input_price_of_enemy6','round3_quantity_of_enemy6','round3_profit_of_enemy6',
+            'round3_input_price_of_enemy7','round3_quantity_of_enemy7','round3_profit_of_enemy7')
+
+

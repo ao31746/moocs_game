@@ -220,12 +220,6 @@
 				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 			})
 
-			//===============show the GUI===============
-
-			
-			
-			
-
 			//===============click the button===============
 			$( "#confrim"+counter.toString() ).click(function() {
 				//Get the input price
@@ -238,71 +232,124 @@
 				} 
 				else
 				{
+
 					$('#price'+counter.toString()).prop('disabled', true);
 					record['round'+counter.toString()+'_input_price'] = price;
 					var quantity = (1000/Num_Of_company);
+					var enemy_price = [];
+					var profit_of_enemy = [];
+					var quantity_of_enemy = [];
+					var Lowest_price_to_sell = 101;
+					var min_counter = 0;
+					
+					for (var i = 0; i < Num_Of_company-1; i+=1) {
+						var seed = Math.floor(Math.random() * (101));
+						temp_price = priceTranformer(seed,Num_Of_company,NumOfNonLoyalCus);
+						enemy_price[i] = Math.round(Number(temp_price));
+						record['round'+counter.toString()+'_input_price_of_enemy'+(i+1).toString()] = enemy_price[i];
+					}
 
-					//calculate the equilium price
-					var Lowest_price_to_sell = (2000*200+100*(Num_Of_company-2))/((Num_Of_company-1)*NumOfNonLoyalCus+1600);
-					var profit_of_enemy = 0;
-					//alert(Lowest_price_to_sell);
-				
+					//Get the min value
+					for (var i = 0; i < Num_Of_company-1; i+=1){
+						if (enemy_price[i]<Lowest_price_to_sell){
+							min = enemy_price[i]
+							min_counter = 1
+						}else{
+							if(enemy_price[i] == Lowest_price_to_sell){
+								min_counter += 1}
+						}
+					}
+					
+
+					
+
 					//===============calculate the profit===============
+					
 					if (price>Lowest_price_to_sell)
 					{
 						profit = (price-100)*(1000/Num_Of_company);
-						profit_of_enemy = Lowest_price_to_sell*((1000/Num_Of_company)+(1000/(Num_Of_company-1)))
+						for (i=0;i<Num_Of_company-1;i++){
+							if (enemy_price[i]==Lowest_price_to_sell){
+								profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company+1000/min_counter);
+								quantity_of_enemy[i]=1000/Num_Of_company+1000/min_counter;
+							}
+							else{
+								profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company);
+								quantity_of_enemy[i]=1000/Num_Of_company;
+							}
+						}
 					}
 					else
 					{
 						if (price == Lowest_price_to_sell)
 						{
-							profit = (price-100)*(1000/Num_Of_company+1000/Num_Of_company);
-							quantity += (1000/Num_Of_company);
-							profit_of_enemy = profit
+							profit = (price-100)*(1000/Num_Of_company+1000/(min_counter+1));
+							quantity += (1000/(min_counter+1));
+							for (i=0;i<Num_Of_company-1;i++){
+								if (enemy_price[i]==Lowest_price_to_sell){
+									profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company+(1000/(min_counter+1)));
+									quantity_of_enemy[i] = 1000/Num_Of_company+(1000/(min_counter+1));
+								}
+								else{
+									profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company);
+									quantity_of_enemy[i]= 1000/Num_Of_company;
+								}
+							}
 						}
 
 						else
 						{
 							profit = (price-100)*(NumOfNonLoyalCus+1000/Num_Of_company);
-							quantity += 1000
-							profit_of_enemy = (Lowest_price_to_sell-100)*(1000/Num_Of_company)
+							quantity += NumOfNonLoyalCus
+							for (i=0;i<Num_Of_company-1;i++){
+								profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company);
+								quantity_of_enemy[i] = 1000/Num_Of_company;
+							}
+
 						}
 					}
 					
 					record['round'+counter.toString()+'_quantity'] = quantity;
 					record['round'+counter.toString()+'_profit'] = profit;
+					for (i = 0; i<Num_Of_company-1;i++){
+						record['round'+counter.toString()+'_quantity_of_enemy '+(i+1).toString()] = quantity_of_enemy[i];
+						record['round'+counter.toString()+'_profit_of_enemy '+(i+1).toString()] = profit_of_enemy[i];
+					}
 					
 
 					//===============output the result===============
 					if (profit>0){
-						$( "#result"+counter.toString() ).text( "恭喜你賣出了"+quantity+" 個商品，總共賺了 "+profit+" 元");
+						$( "#result"+counter.toString() ).append( "恭喜你賣出了"+quantity+" 個商品，總共賺了 "+profit+" 元"+"<br>");
 					}
 					else
 					{
 						if(profit == 0)
 						{
-							$( "#result"+counter.toString() ).text( "你賣出了 "+quantity+" 個商品，不賺不賠");
+							$( "#result"+counter.toString() ).append( "你賣出了 "+quantity+" 個商品，不賺不賠"+"<br>");
 						}
 						else
 						{
 							profit = profit*(-1)
 							//$( "#result"+counter ).append( "你賣出了 "+quantity+" 個商品，你賠了 "+profit+" 元");
-							$( "#result"+counter.toString() ).text( "你賣出了 "+quantity+" 個商品，你賠了 "+profit+" 元");
+							$( "#result"+counter.toString() ).append( "你賣出了 "+quantity+" 個商品，你賠了 "+profit+" 元"+"<br>");
 						}
 					}
 
-					if (profit_of_enemy>0){
-						$( "#result"+counter.toString() ).append("，你的對手賺了"+profit_of_enemy+"元");
-					}
-					else{
-						if (profit_of_enemy==0){
-							$( "#result"+counter.toString() ).append("，你的對手不賺不賠");
+					for (i = 0; i<Num_Of_company-1;i++){
+						if (profit_of_enemy[i]>0){
+						$( "#result"+counter.toString() ).append("對手"+(i+1).toString()+"出價"+enemy_price[i]+"元，賣出了"+quantity_of_enemy[i]+"個商品，賺了"+profit_of_enemy[i]+"元"+"<br>");
 						}
 						else{
-							$( "#result"+counter.toString() ).append("，你的對手賠了"+profit_of_enemy*(-1)+"元");
+							if (profit_of_enemy[i]==0){
+								$( "#result"+counter.toString() ).append("對手"+(i+1).toString()+"出價"+enemy_price[i]+"元，賣出了"+quantity_of_enemy[i]+"個商品，不賺不賠"+"<br>");
+							}
+							else{
+								profit_of_enemy[i] = profit_of_enemy[i]*(-1);
+								$( "#result"+counter.toString() ).append("對手"+(i+1).toString()+"出價"+enemy_price[i]+"元，賣出了"+quantity_of_enemy[i]+"個商品，陪了"+profit_of_enemy[i]+"元"+"<br>");
+							}
 						}
 					}
+					
 					$( "#output"+counter.toString()).css("display", "inline-block");
 					$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });	
 				}
@@ -327,6 +374,14 @@
 				$('#price'+counter.toString()).prop('disabled', false);
 			})
 
+		}
+
+		function priceTranformer(seed,Num_Of_company,NumOfNonLoyalCus){
+			seed = seed/100;
+			var temp1 = Num_Of_company * NumOfNonLoyalCus*Math.pow((1-seed),(Num_Of_company-1));
+			var temp2 = 2000-NumOfNonLoyalCus;
+			var price = (200*temp2+100*temp1)/(temp1+temp2)
+			return price
 		}
 
 		function disable(){
