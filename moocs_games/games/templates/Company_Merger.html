@@ -12,40 +12,25 @@
 
 	<body>
 		<div class="container">
-			<div class=WordSection1>
+			<div class="start1">
 
-			<p class=MsoNormal align=center style='text-align:center'><b><span
-			style='font-family:新細明體'>公司併購詳細規則</span></b></p>
+			<h1>公司併購詳細規則</h1>
+			<br/>
+			<p>在這個情境裡，我有一家公司正在尋找買家，而你是唯一的可能買家，亦即沒有人與你競爭。另外，你有技術在手，只要買下公司，就能改善公司生產流程，使生產力增加，利潤也會因此增加50%。假設我手裡利潤是萬，在你手裡利潤就會變成75萬，依此類推。但是，即使你確知能提升公司生產力50%，卻不知道公司目前生產力是多少。然而，你知道這家公司在我手上只可能產生0~100萬的利潤，這個利潤是在0~100萬的區間中均勻分布的。
+			</p>
+			<br/>
+			<p>
+			你能出價的區間在0~150萬，0就代表不買。你出價後，我會根據公司的實際估值資訊決定賣或不賣。
+			</p>
 
-			<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; </span><span style='font-family:
-			新細明體'>在這個情境裡，我有一家公司正在尋找買家，而你是唯一的可能買家，亦即沒有人與你競爭。另外，你有技術在手，只要買下公司，就能改善公司生產流程，使生產力增加</span><span
-			lang=EN-US>50%</span><span style='font-family:新細明體'>，利潤也會因此增加</span><span
-			lang=EN-US>50%</span><span style='font-family:新細明體'>。假設我手裡利潤是</span><span
-			lang=EN-US>50</span><span style='font-family:新細明體'>萬，在你手裡利潤就會變成</span><span
-			lang=EN-US>75</span><span style='font-family:新細明體'>萬，依此類推。但是，即使你確知能提升公司生產力</span><span
-			lang=EN-US>50%</span><span style='font-family:新細明體'>，卻不知道公司目前生產力是多少。然而，你知道這家公司在我手上只可能產生</span><span
-			lang=EN-US>0~100</span><span style='font-family:新細明體'>萬的利潤，這個利潤是在</span><span
-			lang=EN-US>0~100</span><span style='font-family:新細明體'>萬的區間中均勻分布的。</span></p>
-
-			<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
-
-			<p class=MsoNormal><span style='font-family:新細明體'>你能出價的區間在</span><span
-			lang=EN-US>0~150</span><span style='font-family:新細明體'>萬，</span><span
-			lang=EN-US>0</span><span style='font-family:新細明體'>就代表不買。你出價後，我會根據公司的實際估值資訊決定賣或不賣。</span></p>
-
-			<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
-
-			
 			<button class='btn btn-primary' id="start">閱讀完畢，準備開始</button>
-			</div>
 
+			<p></p>
+			<p></p>
 
-			<p id = space></p>
-			<p id = space1></p>
 			<div class="row">
 
-
-				<div id = ROFR_1 class="col-8">
+				<div id = ROFR_1 class="col-sm-6">
 					<h2>
 						公司併購
 					</h2>
@@ -55,24 +40,26 @@
 			  		<div class="col-3">
 						<input class="form-control" type="number" placeholder="價格(0~150萬)" id="price" min="1" max="150">
 			  			<p></p>
-			  			<button class='btn btn-primary' id='confrim'>確認</button>
+			  			<button class='btn btn-primary' id='confirm'>確認</button>
+			  			<p></p>
+			  			<button class='btn btn-primary' id="again">再玩一次</button>
 			  		</div>
 				</div>
 				
 
-				<div id = ROFR_2 class="col-4">
+				<div id = ROFR_2 class="col-sm-6">
 					<h2>
 						圖示
 					</h2>
 					<div id="result1"></div>
 					<canvas id="myCanvas" width="300" height="400"></canvas>
 					<div id="result"></div>
-					<button class='btn btn-primary' id="again">再玩一次</button>
 				</div>
 
 
 			</div>
-		</div>		
+		</div>	
+		</div>	
 	</body>
 	
 	<script>
@@ -84,7 +71,7 @@
 		var company_value = Math.floor(Math.random() * (101));
 		//var price = $("#price").val();
 			$( "#again" ).click(function() {
-
+				$('#price').val('');
 				$("#ROFR_2").css("display","none");
 				$("#again").css("display","none");
 				$(':input').prop('disabled', false);
@@ -93,6 +80,7 @@
 				$( "#result1" ).html("")
 				var canvas = $('#myCanvas')[0]; // or document.getElementById('canvas');
 				canvas.width = canvas.width;
+
 			});
 		
 		
@@ -103,13 +91,13 @@
 			});
 
 
-			$( "#confrim" ).click(function() 
+			$( "#confirm" ).click(function() 
 			{
 				
 				//calculate the profit
 				price = $("#price").val();
 
-				if(price<=0 || price>=150)
+				if(price<0 || price>150)
 				{
 				alert("請輸入價格於0~150");
 				} 
@@ -148,6 +136,8 @@
 				var ptn_highest_y = price*(0.5)
 				$( "#ROFR_2" ).css("display", " inline-block");
 				$( "#result1" ).append( "Y軸交點 (0,"+ ptn_with_y_axis +"), peak (" +price+ ","+ptn_highest_y+" )<br>(X軸為公司實際價值，Y軸為獲利)");
+
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 				//====================drawXAxis========================
 				Graph.prototype.drawXAxis = function() {
 		        var context = this.context;
@@ -453,6 +443,10 @@
 		}
 		.container{
 			margin-top:5%;
+		}
+		.start1{
+			width: 75%;
+  			margin: 0 auto;
 		}
 		#result{
 			 width:300px;
