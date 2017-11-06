@@ -14,8 +14,8 @@
 	<body>
 		<div class="container">
 		<div id ="start">
-			<h1>柔道策略詳細規則</h1>
-<p>在某個市場中，有一個老廠商獨佔整個市場，並且產能足夠供應所有顧客。而你<br />是個剛起步的創業家，打算進入這個市場。<br />在市場中共有100個顧客，只要價格不超過他們的願付價格，他們都會購買商品<br />。由於老廠商長久耕耘市場，建立品牌價值與信任度，顧客對老廠商產品的願付價格<br />是200元，而你名不見經傳，因此顧客只願意支付160元的產品購買你的商品。老廠商<br />有豐富的生產經驗，降低成本，因此老廠商每個商品的成本只需要100 元；而你剛開<br />始生產，仍然有很多流程不甚順利，因此每個商品的成本是120元，此外，你還有進<br />入成本100元。<br />顧客則選擇能帶給他們最多效益的廠商購買，假設你與老廠商都出價120元，那<br />個購 買你的產品的效益是160 - 120 = 40元，跟老廠商購買的效益則是200 &ndash; 120 =<br />80。因此在這情況下顧客會跟老廠商購買。<br /><br />這個實驗共有三階段。<br /><br /><b>第一階段</b><br />新廠商（也就是你）決定產量與商品價格。<br /><br /><b>第二階段</b><br />老廠商會根據你剛剛的出價與產量，決定自己的產品定價。<br /><br /><b>第三階段</b><br />顧客根據老廠商和新廠商的定價，選擇購買對自己效益最高的商品。</p>
+			<h1>柔道策略詳細規則</h1><br/><br/>
+<p>在某個市場中，有一個老廠商獨佔整個市場，並且產能足夠供應所有顧客。而你<br />是個剛起步的創業家，打算進入這個市場。<br/><br />在市場中共有100個顧客，只要價格不超過他們的願付價格，他們都會購買商品<br />。由於老廠商長久耕耘市場，建立品牌價值與信任度，顧客對老廠商產品的願付價格<br />是200元，而你名不見經傳，因此顧客只願意支付160元的產品購買你的商品。老廠商<br />有豐富的生產經驗，降低成本，因此老廠商每個商品的成本只需要100 元；而你剛開<br />始生產，仍然有很多流程不甚順利，因此每個商品的成本是120元，此外，你還有進<br />入成本100元。<br/><br />顧客則選擇能帶給他們最多效益的廠商購買，假設你與老廠商都出價120元，那<br />個購 買你的產品的效益是160 - 120 = 40元，跟老廠商購買的效益則是200 &ndash; 120 =<br />80。因此在這情況下顧客會跟老廠商購買。<br /><br />這個實驗共有三階段。<br /><br /><b>第一階段</b><br />新廠商（也就是你）決定產量與商品價格。<br /><br /><b>第二階段</b><br />老廠商會根據你剛剛的出價與產量，決定自己的產品定價。<br /><br /><b>第三階段</b><br />顧客根據老廠商和新廠商的定價，選擇購買對自己效益最高的商品。</p>
 			<button class='btn btn-primary' id="get_start">閱讀完畢，準備開始</button>
 		</div>
 		<div id = "game" class = "row game">
@@ -35,7 +35,11 @@
 
 			<div id="result_1"></div>
 		</div>	
-		<div class = "game"><button class='btn btn-primary' id='confirm'>確認</button></div>
+		<div class = "game">
+			<button class='btn btn-primary' id='confirm'>確認</button>
+				&#160;
+			<button class='btn btn-primary' id='reset'>再玩一次</button>
+		</div>
 		
 	</body>
 	
@@ -43,6 +47,11 @@
 		$( "#get_start" ).click(function() {
 			$(".game").css("display","flex");
 			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+		});
+		$( "#reset" ).click(function() {
+			$("input").val('');
+			$("#result_1").html(' ');
+			$('#confirm').prop('disabled', false);
 		});
 		var oldCost = 100, newCost = 120, oldMaxPrice = 200, newMaxPrice = 160;
 		var entryCost = 100, customerNumber = 100;
@@ -80,19 +89,19 @@
 						//新廠商利潤
 						if (newProfit >= 0)
 						{
-							$( "#result_1" ).html( "恭喜你成功打入市場！且賺了 " + newProfit + " 元。\n");
+							$( "#result_1" ).html( "恭喜你成功打入市場！且賺了<div class='price'> " + newProfit + "</div> 元。\n");
 							record_result();
 						}
 						else
 						{
 							loss = Math.abs(newProfit);
-							$( "#result_1" ).html("雖然你成功進入市場賣出商品，但卻虧了 " + loss + " 元，下次記得進入成本要算進去喔～");
+							$( "#result_1" ).html("雖然你成功進入市場賣出商品，但卻虧了<div class='price'> " + loss + "</div> 元，下次記得進入成本要算進去喔～");
 							record_result();
 						}
 					}
 					if (oldMaxPriceProfit <= oldUndercutPriceProfit)
 					{
-						$( "#result_1" ).html("老廠商降價搶市場，你什麼都沒賣出去，虧損了 " + entryCost + " 元。");
+						$( "#result_1" ).html("老廠商降價搶市場，你什麼都沒賣出去，虧損了<div class='price'> " + entryCost + "</div> 元。");
 						record_result();
 					}
 				}
@@ -104,6 +113,7 @@
 		
 		function record_result()
 		{
+			$('#confirm').prop('disabled', true);
 			console.log(record);
 			var form_data = new FormData();
 
@@ -162,17 +172,25 @@
 			margin-top:5%;
 		}
 		#start{
-			margin-left: 1%;
-			margin-bottom:5%;
+			width: 75%;
+  			margin: 0 auto;
 		}
 		.game{
+
 			display:none;
 			height: 150px;
+			width: 75%;
+  			margin: 0 auto;
 		}
-		#confirm{
-			margin-top:3%;
+		#confirm, #reset{
+			margin-top:50px;
 			height:40px;
 		}
+		.price{
+			display: inline;
+			color:red;
+		}
+
     </style>
 </html>
 
