@@ -167,9 +167,69 @@
 			})
 
 			//===============click the button===============
-			$( "#confirm"+counter.toString() ).click(function() {
-				
-				//Get the input price
+			//$( "#confirm"+counter.toString() ).click(function() {})
+
+
+			$( "#confirm1").click(function() {
+				counter = 1;
+				AfterConfirmClick(counter);
+				$('html, body').animate({scrollTop: $("#input1").offset().top});
+			})
+			$( "#confirm2").click(function() {
+				counter = 2;
+				AfterConfirmClick(counter);
+				$('html, body').animate({scrollTop: $("#input2").offset().top});
+			})
+			$( "#confirm3").click(function() {
+				counter = 3;
+				AfterConfirmClick(counter);
+				$('html, body').animate({scrollTop: $("#input3").offset().top});
+			})
+
+			$( "#next"+counter.toString() ).click(function() {
+				$("#next"+counter.toString()).prop('disabled', true);
+				$( "#input"+(counter+1).toString()).css("display", "inline-block");
+				counter += 1
+				Num_Of_company = Num_Of_company*2
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				PriceWar(Num_Of_company,counter)
+			})
+
+			$( "#again1" ).click(function() {
+				counter = 1
+				Num_Of_company = 2
+				$( "#result1" ).html("")
+				$( "#output1").css("display", "none");
+				$("#confirm1").prop('disabled', false);
+				$('#price1').val('');
+				$('#price1').prop('disabled', false);
+				$('html, body').animate({scrollTop: $("#input1").offset().top});
+			})
+			$( "#again2" ).click(function() {
+				counter = 2
+				Num_Of_company = 4
+				$( "#result2" ).html("")
+				$( "#output2").css("display", "none");
+				$("#confirm2").prop('disabled', false);
+				$('#price2').val('');
+				$('#price2').prop('disabled', false);
+				$('html, body').animate({scrollTop: $("#input2").offset().top});
+			})
+			$( "#again3" ).click(function() {
+				counter = 3
+				Num_Of_company = 8
+				$( "#result3" ).html("")
+				$( "#output3").css("display", "none");
+				$("#confirm3").prop('disabled', false);
+				$('#price3').val('');
+				$('#price3').prop('disabled', false);
+				$('html, body').animate({scrollTop: $("#input3").offset().top});
+			})
+
+		}
+
+		function AfterConfirmClick(counter){
+			//Get the input price
 				price = parseInt($("#price"+counter.toString()).val());
 				
 				if(price<=0 || price>=MAX_price)
@@ -298,51 +358,7 @@
 					}
 					
 					$( "#output"+counter.toString()).css("display", "inline-block");
-					$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });	
 				}
-
-				
-							
-			})
-
-			$( "#next"+counter.toString() ).click(function() {
-				$("#next"+counter.toString()).prop('disabled', true);
-				$( "#input"+(counter+1).toString()).css("display", "inline-block");
-				counter += 1
-				Num_Of_company = Num_Of_company*2
-
-				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-				PriceWar(Num_Of_company,counter)
-			})
-
-			$( "#again1" ).click(function() {
-				counter = 1
-				Num_Of_company = 2
-				$( "#result1" ).html("")
-				$( "#output1").css("display", "none");
-				$("#confirm1").prop('disabled', false);
-				$('#price1').val('');
-				$('#price1').prop('disabled', false);
-			})
-			$( "#again2" ).click(function() {
-				counter = 2
-				Num_Of_company = 4
-				$( "#result2" ).html("")
-				$( "#output2").css("display", "none");
-				$("#confirm2").prop('disabled', false);
-				$('#price2').val('');
-				$('#price2').prop('disabled', false);
-			})
-			$( "#again3" ).click(function() {
-				counter = 3
-				Num_Of_company = 8
-				$( "#result3" ).html("")
-				$( "#output3").css("display", "none");
-				$("#confirm3").prop('disabled', false);
-				$('#price3').val('');
-				$('#price3').prop('disabled', false);
-			})
-
 		}
 
 		function priceTranformer(seed,Num_Of_company,NumOfNonLoyalCus){
