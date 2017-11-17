@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -59,16 +60,21 @@
 					<button class='btn btn-primary CBS_Bu_2' id='CBS_accept_2'> 接受</button>
 					<button class='btn btn-primary CBS_Bu_2' id='CBS_reject_2'> 拒絕</button>
 					
+					<button class='btn btn-primary' id='reset'>再玩一次</button>
 					<p id ="result_2"></p>
+					
 				</div>
 			</div>
 		</div>		
 	</body>
 	
 	<script>
+		$.cookie('ifstart', false, { path:'/', expires: 2 });
 		$( "#get_start" ).click(function() {
 				$("#game").css("display","flex");
 				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				$.cookie('ifstart', true);
+				console.log($.cookie('ifstart'))
 			});
 		function getRandom()
 		{
@@ -156,27 +162,10 @@
 		
 		function second_round()
 		{
-			// $.alert({
-			//     title: '提示!',
-			//     content: '準備好了嗎? 準備進入情境二',
-			// });
-			$.confirm({
-			    title: '提示!',
-			    content: '準備好了嗎? 準備進入情境二',
-			    buttons: {
-			        confirm: function () {
-			            
-			            sec();
 			
-			        },
-			        cancel: function () {
-			            sec();
-			        }
-			    }
-			});
-			console.log(  $(".jconfirm-buttons")  )
-			//alert("準備好了嗎? 準備進入情境二")
-			
+			alert("準備好了嗎? 準備進入情境二");
+			sec();
+
 		}
 		function sec(){
 			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
@@ -226,8 +215,26 @@
 				record_result();
 			});
 		}
+
+		$( "#reset" ).click(function() {
+			location.reload();
+		});
+		
+		// if (window.performance) {
+		//   console.info("window.performance work's fine on this browser");
+		// }
+		console.log($.cookie('ifstart'))
+		if ((performance.navigation.type == 1) && ($.cookie('ifstart'))) {
+		    console.info( "This page is reloaded" );
+		    $( "#get_start" ).trigger( "click" );
+		} else {
+		    console.info( "This page is not reloaded");
+		}
+
 		function record_result()
 		{
+			$('#reset').css('display','inline-block')
+			$('#reset').prop('disabled', false);
 			$( "#result_2" ).append( "<hr>");
 			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 				
@@ -312,6 +319,9 @@
 		.price{
 			color:red;
 			display: inline;
+		}
+		#reset{
+			display:none;
 		}
     </style>
 </html>
