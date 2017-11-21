@@ -69,12 +69,12 @@
 	</body>
 	
 	<script>
-		$.cookie('ifstart', false, { path:'/', expires: 2 });
+
+
 		$( "#get_start" ).click(function() {
 				$("#game").css("display","flex");
 				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 				$.cookie('ifstart', true);
-				console.log($.cookie('ifstart'))
 			});
 		function getRandom()
 		{
@@ -223,12 +223,14 @@
 		// if (window.performance) {
 		//   console.info("window.performance work's fine on this browser");
 		// }
-		console.log($.cookie('ifstart'))
-		if ((performance.navigation.type == 1) && ($.cookie('ifstart'))) {
+		if (performance.navigation.type == 1) {
 		    console.info( "This page is reloaded" );
-		    $( "#get_start" ).trigger( "click" );
+		    if ($.cookie('ifstart')=='true'){
+		    	$( "#get_start" ).trigger( "click" );
+		    }		    
 		} else {
 		    console.info( "This page is not reloaded");
+		    $.cookie('ifstart', false);
 		}
 
 		function record_result()
