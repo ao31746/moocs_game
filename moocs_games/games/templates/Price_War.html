@@ -72,12 +72,15 @@
 			  			<button class='btn btn-primary' id='confirm1'>確認</button>
 			  			<p></p>
 			  		</div>
+			  		<div style="margin-bottom: 20px;"></div>
 				</div>
+				
 
 				<div id = output1 class="col-8">
 					<div id="result1"></div>
 					<button class='btn btn-primary' id='again1'> 再玩一次</button>
 					<button class='btn btn-primary' id='next1'>進入情境二</button>
+					<div style="margin-bottom: 50px;"></div>
 				</div>
 
 				<div id = input2 class="col-8">
@@ -95,12 +98,14 @@
 			  			<button class='btn btn-primary' id='confirm2'>確認</button>
 			  			<p></p>
 			  		</div>
+			  		<div style="margin-bottom: 20px;"></div>
 				</div>
 
 				<div id = output2 class="col-8">
 					<div id="result2"></div>
 					<button class='btn btn-primary' id='again2'> 再玩一次</button>
 					<button class='btn btn-primary' id='next2'>進入情境三</button>
+					<div style="margin-bottom: 50px;"></div>
 				</div>
 
 				
@@ -123,11 +128,13 @@
 			  			<button class='btn btn-primary' id='confirm3'>確認</button>
 			  			<p></p>
 			  		</div>
+			  		<div style="margin-bottom: 20px;"></div>
 				</div>
 
 				<div id = output3 class="col-8">
 					<div id="result3"></div>
 					<button class='btn btn-primary' id='again3'> 再玩一次</button>
+					<div style="margin-bottom: 50px;"></div>
 				</div>
 		</div>	
 		</div>	
@@ -172,27 +179,35 @@
 
 			$( "#confirm1").click(function() {
 				counter = 1;
-				AfterConfirmClick(counter);
+				Num_Of_company = 2;
+				AfterConfirmClick(Num_Of_company,counter);
 				$('html, body').animate({scrollTop: $("#input1").offset().top});
 			})
 			$( "#confirm2").click(function() {
 				counter = 2;
-				AfterConfirmClick(counter);
+				Num_Of_company = 4;
+				AfterConfirmClick(Num_Of_company,counter);
 				$('html, body').animate({scrollTop: $("#input2").offset().top});
 			})
 			$( "#confirm3").click(function() {
 				counter = 3;
-				AfterConfirmClick(counter);
+				Num_Of_company = 8;
+				AfterConfirmClick(Num_Of_company,counter);
 				$('html, body').animate({scrollTop: $("#input3").offset().top});
 			})
 
-			$( "#next"+counter.toString() ).click(function() {
-				$("#next"+counter.toString()).prop('disabled', true);
-				$( "#input"+(counter+1).toString()).css("display", "inline-block");
-				counter += 1
-				Num_Of_company = Num_Of_company*2
+			$( "#next1").click(function() {
+				$("#next1").prop('disabled', true);
+				$( "#input2").css("display", "inline-block");
 				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-				PriceWar(Num_Of_company,counter)
+				//PriceWar(4,2)
+			})
+
+			$( "#next2" ).click(function() {
+				$("#next2").prop('disabled', true);
+				$( "#input3").css("display", "inline-block");
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				//PriceWar(8,3)
 			})
 
 			$( "#again1" ).click(function() {
@@ -228,11 +243,13 @@
 
 		}
 
-		function AfterConfirmClick(counter){
+		function AfterConfirmClick(Num_Of_company,counter)
+		{
 			//Get the input price
 				price = parseInt($("#price"+counter.toString()).val());
+				temp = $("#price"+counter.toString()).val();
 				
-				if(price<=0 || price>=MAX_price)
+				if(price<=0 || price>=MAX_price || temp == '')
 				{
 				alert("請輸入價格於1~200");
 				$('#price'+counter.toString()).val('');
@@ -324,7 +341,7 @@
 					}
 					
 
-					//===============output the result===============
+					//===============outp ut the result===============
 					if (profit>0){
 						$( "#result"+counter.toString() ).append( "恭喜你賣出了"+quantity+" 個商品，總共賺了 "+profit+" 元"+"<br>");
 					}
