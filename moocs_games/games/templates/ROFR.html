@@ -162,9 +162,13 @@
 		
 		function second_round()
 		{
-			
-			alert("準備好了嗎? 準備進入情境二");
-			sec();
+			$( "#result" ).append( "</br> <button class='btn btn-primary' id='next'>進入情境二</button>");
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+			$( "#next" ).click(function() {
+				alert("準備好了嗎? 準備進入情境二");
+				sec();
+			});
+
 
 		}
 		function sec(){
