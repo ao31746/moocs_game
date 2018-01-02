@@ -1,388 +1,309 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Price War</title>
+		<title>電視影集授權談判</title>
 		<meta charset="utf-8">	
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/t/bs/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-		<meta name=標題 content="">
-		<meta name=關鍵字 content="">
-		<meta http-equiv=Content-Type content="text/html; charset=x-mac-chinesetrad">
-		<meta name=ProgId content=Word.Document>
-		<meta name=Generator content="Microsoft Word 15">
-		<meta name=Originator content="Microsoft Word 15">
-		<link rel=File-List href="價格戰詳細規則%20(1).fld/filelist.xml">
-		<link rel=themeData href="價格戰詳細規則%20(1).fld/themedata.thmx">
-
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript"></script>
 	</head>
-	<style>
-		#input1,#output1,#input2,#output2,#input3,#output3{
-			display:none;
-		}
-		.container{
-			margin-top:5%;
-		}
-		#result1,#result2,#result3{
-			 width:500px;
-		}
-		#WordSection1{
-			width: 75%;
-  			margin: 0 auto;
-		}
-    </style>
-    
+
 	<body>
-         <div class="container" style="width:100%;padding-top:50px;text-align: center; font-size: 48px;">
-        <h1>價格戰</h1>
-        </div>
 		<div class="container">
-			<div id=WordSection1 class="container" style="width:75%;padding:50px;text-align: left; font-size: 20px;">
-  				<p>這個遊戲叫「價格戰」，顧名思義，將使用價格來一決勝負。在這個遊戲中，所有廠商（也就是遊戲參與者）的成本都一樣，每個產品成本是100元，而所有人的產能都是無限大，能單獨供應整個市場的需求。市場內顧客總數為2000人，所有顧客的願付價格都一樣為200元。
-				    <br/>
-				    <br/>
-				    在這個版本中，每個廠商有一定的忠實客戶數量。所謂忠實客戶，是指只要該廠商價格不超越顧客的願付價格，那個不論其他廠商出價多低，忠實客戶一定會向該廠商購買。
-				</p>            
-				
-                    <div class="container text-center" style="line-height: 40px;margin-top:100px;">
-				    <p>情境一：
-				    <br/>
-				    市場內共有2家廠商，每家有500名忠實客戶。</p>
-				    <br/>
-                    <p>
-				    情境二：
-				    <br/>
-				    市場內共有4家廠商，每家有250名忠實客戶。</p>
-				    <br/>
-                    <p>
- 				   情境三：
- 				   <br/>
-				    市場內共有8家廠商，每家有125名忠實客戶。</p>
-                    </div>
-          
-                <div style="text-align: center;">
-				<button class='btn btn-primary' id='start' style="margin: 50px;">閱讀完畢，準備開始</button>
-                </div>      
-            </div>
-<!--            閱讀完畢-->
-            <div class="row" style="width:75%;">
-				<div id= input1 class="col-md-8" class="col-sm-7" style="align-content: center; line-height:40px;font-size: 20px;margin-bottom: 500px;">
-                    <h2>
-						情境一：
-					</h2>
-                    <br/>
-					<p>市場內共有2家廠商，每人有500名忠實客戶。</p>
-                    <br/>
-                     <p><label id="example-text-input" class="col-md-6">出價:</label></p>
-			  		<div>
-						<p><input class="form-control" style="width: 300px;height: 50px" type="number" placeholder="價格(1~200萬)" id="price1" min="1" max="200"></p>
-			  			
-                        <p><button class='btn btn-primary' id='confirm1'>確認</button></p>
-			  		</div>
-			  		<div style="margin-bottom: 20px;"></div>
-				</div>
+			<div id ="start">
 
-				<div id = output1 class="col-8">
-					<div id="result1"></div>
-					<button class='btn btn-primary' id='again1'> 再玩一次</button>
-					<button class='btn btn-primary' id='next1'>進入情境二</button>
-					<div style="margin-bottom: 50px;"></div>
-				</div>
+			<h1>電視影集授權談判</h1>
+			<br /><br />
+			<d>時間回到2001年1月，由Paramount影視公司製作的《歡樂一家親》(FRASIER) 情境喜劇，已在NBC電視台連續播出8年，即將邁入第9季。因為Paramount與NBC的合約到期，雙方正要開始進行續約的議價協商。<br /><br />此時的《歡樂一家親》影集已是最受美國觀眾喜愛的電視節目，曾創下多項收視記錄
+			，也在8年的時間裡拿下過多達24項的「黃金時段艾美獎」(Primetime Emmy Award)。帶著輝煌的成績，Paramount在續約過程中要求極為高昂的節目播映授權費，並威脅說
+			CBS電視台也願意出高價來搶《歡樂一家親》的播映權。<br /><br />不過，Paramount和NBC先前已就續約的「談判流程」達成共識，他們會依照雙方講定
+			的遊戲規則來議價。基本上，Paramount必須先與NBC一對一議價，只有在雙方正式破
+			局的情況下，Paramount才能開始與其他電視台談《歡樂一家親》的播映授權。不只如
+			此，如果最後Paramount同意與其他任何電視台簽約，而授權費卻低過NBC先前的出價
+			金額，那麼NBC可以享有「優先權」(right of first refusal)，也就是說，只要NBC願意接
+			受Paramount與其他電視台所談成的合約，Paramount協商就必須與NBC簽約。<br /><br />在這個遊戲裡，將請你扮演Paramount的角色，並以Paramount能獲得最大利益的目標來議價。<br /><br />
 
-				<div id = input2 class="col-8">
-					<p></p>
+			<b>角色介紹</b><br />Paramount：製作公司，在續約協商的過程中極力爭取天價的播映授權費
+			NBC：期待成功續約，對新合約擁有「優先權」（由電腦扮演）
+			CBS：期待有機會從NBC手中搶下新一季的播映權（由電腦扮演）
+
+			<br /><br />
+			<b>遊戲規則</b><br />
+			 NBC的播映權即將到期，如果可以成功續約，新一季的《歡樂一家親》可以為NBC帶來1000萬美金的廣告收入。Paramount和NBC已同意採用以下流程來協商新合約，共分三個階段。
+
+			 <br /><br />
+			 <b>第一階段：NBC出價</b><br />Paramount與NBC先互派代表會面討論，然後由NBC決定出價金額並填寫提議書。
+			Paramount在收到提議書之後，可選擇「簽字同意」或「拒絕」。如果Paramount簽字
+			同意，則雙方成交，遊戲結束。如果Paramount拒絕NBC的出價，則協商進入「第二階段」&hellip;&hellip;
+
+			<br /><br />
+			<b>第二階段：CBS出價</b><br />Paramount已拒絕了NBC的出價，在這個階段要開始和CBS議價。
+			Paramount與CBS將先互派代表會面討論，然後CBS可以選擇「棄權」或「出價」。CBS
+			若棄權，則遊戲結束，最後沒有任何電視台取得播映權；CBS若決定出價，就填寫提議
+			書交給Paramount。
+			
+
+			<br />
+			根據評估，新一季的《歡樂一家親》也可以為CBS帶來1000萬美金的廣告收入。不過，
+			在出價的過程中，CBS需要額外支付顧問與法律費用共計20萬美金。請注意，無論最後
+			協商結果如何，CBS只要有出價，就必須要支付這些「協商成本」。
+			Paramount在收到提議書之後，可以選擇「簽字同意」或是「拒絕」。如果Paramount
+			拒絕CBS的出價，則雙方協商破局，遊戲結束，最後沒有任何電視台取得播映權。如果
+			Paramount簽字同意，而且CBS的出價不低於NBC在第一階段的出價，則雙方成交，遊
+			戲結束，最新一季的《歡樂一家親》將改由CBS播出。如果Paramount簽字同意，但
+			CBS的出價低過NBC在第一階段的出價，那麼協商程序就進到第三階段&hellip;&hellip;
+			這裡的遊戲規則是大幅簡化與改寫後的版本；若你好奇當年 Paramount與NBC真實的協商規則，可以參考附錄提供的歷史資料。
+
+			<br /><br />
+			<b>第三階段：NBC行使「優先權」</b><br />NBC享有「優先權」，因此可以選擇是否要「簽字接受」Paramount和CBS先前談成的
+			合約。如果NBC簽字接受，則Paramount與NBC成交。如果NBC拒絕接受，則Paramount
+			與CBS成交。
+
+			<br />
+			Paramount的利潤完全來自於授權費。簽約取得播映權的電視台會有1000萬美金的收入
+			，但同時需要支付授權費。此外，CBS只要出價，就必須支付20萬美金的協商成本。
+
+			<br/><br/><b>變種規則──當NBC不再享有「優先權」</b><br />假設在續約協商的過程中，NBC不再享有「優先權」。新的協商流程會是這樣：
+			第一階段：照舊。
+			第二階段：大致照舊，唯一的修正是，只要Paramount簽字同意CBS的出價，雙方便成
+			交，遊戲結束。最後，在這個版本的遊戲規則裡，沒有第三階段。<br /><br />
+
+				<div id = "start_div"><button class='btn btn-primary' id="get_start">閱讀完畢，準備開始</button>
+				</div>
+			</div>
+
+			<div id = "game_container">
+			<div class="row" id = "game">
+				<div id = ROFR_1 class="col">
 					<h2>
-						情境二：
+						情境一 - NBC擁有優先權
 					</h2>
-					<p>市場內共有4家廠商，每人有250名忠實客戶。</p>
-					<p></p>
-					<label id="example-text-input" class="col-2 col-form-label">出價:</label>
-
-			  		<div class="col-3">
-						<input class="form-control" type="number" placeholder="價格(1~200萬)" id="price2" min="1" max="200">
-			  			<p></p>
-			  			<button class='btn btn-primary' id='confirm2'>確認</button>
-			  			<p></p>
-			  		</div>
-			  		<div style="margin-bottom: 20px;"></div>
+					
+					<p id="NBC_price"></p>
+					
+					<button class='btn btn-primary NBC_Bu' id='NBC_accept'> 接受</button>
+					<button class='btn btn-primary NBC_Bu' id='NBC_reject'> 拒絕</button>
+					
+					<p id="CBS_price"></p>
+					
+					<button class='btn btn-primary CBS_Bu' id='CBS_accept'> 接受</button>
+					<button class='btn btn-primary CBS_Bu' id='CBS_reject'> 拒絕</button>
+					
+					<p id ="result"></p>
 				</div>
-
-				<div id = output2 class="col-8">
-					<div id="result2"></div>
-					<button class='btn btn-primary' id='again2'> 再玩一次</button>
-					<button class='btn btn-primary' id='next2'>進入情境三</button>
-					<div style="margin-bottom: 50px;"></div>
-				</div>
-
 				
-
-				<div id = input3 class="col-8">
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
+				<div id = ROFR_2 class="col">
 					<h2>
-						情境三：
+						情境二 - NBC沒有優先權。
 					</h2>
-					<p>市場內共有8家廠商，每人有125名忠實客戶。</p>
-					<p></p>
-					<label id="example-text-input" class="col-2 col-form-label">出價:</label>
-
-			  		<div class="col-3">
-						<input class="form-control" type="number" placeholder="價格(1~200萬)" id="price3" min="1" max="200">
-			  			<p></p>
-			  			<button class='btn btn-primary' id='confirm3'>確認</button>
-			  			<p></p>
-			  		</div>
-			  		<div style="margin-bottom: 20px;"></div>
+					
+					<p id="NBC_price_2"></p>
+					
+					<button class='btn btn-primary NBC_Bu_2' id='NBC_accept_2'> 接受</button>
+					<button class='btn btn-primary NBC_Bu_2' id='NBC_reject_2'> 拒絕</button>
+					
+					<p id="CBS_price_2"></p>
+					
+					<button class='btn btn-primary CBS_Bu_2' id='CBS_accept_2'> 接受</button>
+					<button class='btn btn-primary CBS_Bu_2' id='CBS_reject_2'> 拒絕</button>
+					
+					<button class='btn btn-primary' id='reset'>再玩一次</button>
+					<p id ="result_2"></p>
+					
 				</div>
-
-				<div id = output3 class="col-8">
-					<div id="result3"></div>
-					<button class='btn btn-primary' id='again3'> 再玩一次</button>
-					<div style="margin-bottom: 50px;"></div>
-				</div>
-		</div>	
-		</div>	
-		</div>
+			</div>
+			</div>
+		</div>		
 	</body>
+	
 	<script>
-	//===============debug===================
-	//不能一次就顯示安個回合，要依序顯示
-	//要讓按鈕能按
-	//（解決）一次顯示一個回合，應該可以解決這個問題
-		var record ={};
-		var MAX_price=201;
-		var NumOfNonLoyalCus = 1000;
-		var Num_Of_company = 2;
-		var counter = 1;
-		//var access = {true,false,false}
-		//=======================================================
-		$(document).ready(function() {
-			PriceWar(Num_Of_company,counter);
-			if (counter>3){
-				record_result();
-			}
-		});
-		//=======================================================
-		function PriceWar(Num_Of_company,counter)
+
+
+		$( "#get_start" ).click(function() {
+				$("#game").css("display","flex");
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				$.cookie('ifstart', true);
+			});
+		function getRandom()
 		{
-			$( "#start").click(function() {
-				$( "#input1").css("display", "inline-block");
-				$('#price'+counter.toString()).prop('disabled', false);
-				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-			})
-			//===============click the button===============
-			//$( "#confirm"+counter.toString() ).click(function() {})
-			$( "#confirm1").click(function() {
-				counter = 1;
-				Num_Of_company = 2;
-				AfterConfirmClick(Num_Of_company,counter);
-				$('html, body').animate({scrollTop: $("#input1").offset().top});
-			})
-			$( "#confirm2").click(function() {
-				counter = 2;
-				Num_Of_company = 4;
-				AfterConfirmClick(Num_Of_company,counter);
-				$('html, body').animate({scrollTop: $("#input2").offset().top});
-			})
-			$( "#confirm3").click(function() {
-				counter = 3;
-				Num_Of_company = 8;
-				AfterConfirmClick(Num_Of_company,counter);
-				$('html, body').animate({scrollTop: $("#input3").offset().top});
-			})
-			$( "#next1").click(function() {
-				$("#next1").prop('disabled', true);
-				$( "#input2").css("display", "inline-block");
-				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-				//PriceWar(4,2)
-			})
-			$( "#next2" ).click(function() {
-				$("#next2").prop('disabled', true);
-				$( "#input3").css("display", "inline-block");
-				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
-				//PriceWar(8,3)
-			})
-			$( "#again1" ).click(function() {
-				counter = 1
-				Num_Of_company = 2
-				$( "#result1" ).html("")
-				$( "#output1").css("display", "none");
-				$("#confirm1").prop('disabled', false);
-				$('#price1').val('');
-				$('#price1').prop('disabled', false);
-				$('html, body').animate({scrollTop: $("#input1").offset().top});
-			})
-			$( "#again2" ).click(function() {
-				counter = 2
-				Num_Of_company = 4
-				$( "#result2" ).html("")
-				$( "#output2").css("display", "none");
-				$("#confirm2").prop('disabled', false);
-				$('#price2').val('');
-				$('#price2').prop('disabled', false);
-				$('html, body').animate({scrollTop: $("#input2").offset().top});
-			})
-			$( "#again3" ).click(function() {
-				counter = 3
-				Num_Of_company = 8
-				$( "#result3" ).html("")
-				$( "#output3").css("display", "none");
-				$("#confirm3").prop('disabled', false);
-				$('#price3').val('');
-				$('#price3').prop('disabled', false);
-				$('html, body').animate({scrollTop: $("#input3").offset().top});
-			})
+		  var num = Math.random();
+		  if(num < 0.5) return false;  
+		  else return true;
 		}
-		function AfterConfirmClick(Num_Of_company,counter)
+
+		var record ={};
+		var min, max;
+		if (getRandom()){
+
+			min = 750;
+			max = 800;
+		}
+		else{
+			min = 800;
+			max = 970;
+		}
+
+		// and the formula is:
+		
+		var NBC_price = Math.floor(Math.random() * (max - min + 1)) + min;
+		var CBS_price, NBC_price_2, CBS_price_2;
+		$(document).ready(function() {
+			first_round();
+		});
+		function first_round()
 		{
-			//Get the input price
-				price = parseInt($("#price"+counter.toString()).val());
-				temp = $("#price"+counter.toString()).val();
+			record['NBC_price_1'] = NBC_price;
+			$( "#NBC_price" ).append( "第一階段：NBC出價 "+NBC_price+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			
+			$( "#NBC_accept" ).click(function() {
+				record['round_1_step_1'] = 1;
+				$( "#result" ).append( "<br/>交易成立，賺了 <div class='price'>"+NBC_price+" </div>萬元。此情境結束，進入情境二。");
+				disable();
+				second_round();
+			});
+			
+			$( "#NBC_reject" ).click(function() {
+				record['round_1_step_1'] = 0;
+				disable();				
+				// and the formula is:
+				var max_2 = 980
+
+				var dif = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
+				//CBS_price = NBC_price - dif;
+				CBS_price = Math.floor(Math.random() * (980 - NBC_price + 1)) + NBC_price;
+				record['CBS_price_1'] = CBS_price;
+				$( ".CBS_Bu" ).css("display", " inline-block");
+				$( ".CBS_Bu" ).prop('disabled', false);
+				$( "#CBS_price" ).append( "第二階段：CBS出價"+CBS_price+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 				
-				if(price<=0 || price>=MAX_price || temp == '')
+			});
+			
+			$( "#CBS_accept" ).click(function() {
+				record['round_1_step_2'] = 1;
+				disable();
+				if(CBS_price>NBC_price)
 				{
-				alert("請輸入價格於1~200");
-				$('#price'+counter.toString()).val('');
-				} 
+					$( "#result" ).append( "恭喜！你與CBS的合約成立，賺了 <div class='price'>"+CBS_price+" 萬元。");
+				}
 				else
 				{
-					$("#confirm"+counter.toString()).prop('disabled', true);
-					$('#price'+counter.toString()).prop('disabled', true);
-					record['round'+counter.toString()+'_input_price'] = price;
-					var quantity = (1000/Num_Of_company);
-					var enemy_price = [];
-					var profit_of_enemy = [];
-					var quantity_of_enemy = [];
-					var Lowest_price_to_sell = 101;
-					var min_counter = 0;
-					
-					for (var i = 0; i < Num_Of_company-1; i+=1) {
-						var seed = Math.floor(Math.random() * (101));
-						temp_price = priceTranformer(seed,Num_Of_company,NumOfNonLoyalCus);
-						enemy_price[i] = Math.round(Number(temp_price));
-						record['round'+counter.toString()+'_input_price_of_enemy'+(i+1).toString()] = enemy_price[i];
-					}
-					//Get the min value
-					for (var i = 0; i < Num_Of_company-1; i+=1){
-						if (enemy_price[i]<Lowest_price_to_sell){
-							min = enemy_price[i]
-							min_counter = 1
-						}else{
-							if(enemy_price[i] == Lowest_price_to_sell){
-								min_counter += 1}
-						}
-					}
-					
-					
-					//===============calculate the profit===============
-					
-					if (price>Lowest_price_to_sell)
-					{
-						profit = (price-100)*(1000/Num_Of_company);
-						for (i=0;i<Num_Of_company-1;i++){
-							if (enemy_price[i]==Lowest_price_to_sell){
-								profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company+1000/min_counter);
-								quantity_of_enemy[i]=1000/Num_Of_company+1000/min_counter;
-							}
-							else{
-								profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company);
-								quantity_of_enemy[i]=1000/Num_Of_company;
-							}
-						}
-					}
-					else
-					{
-						if (price == Lowest_price_to_sell)
-						{
-							profit = (price-100)*(1000/Num_Of_company+1000/(min_counter+1));
-							quantity += (1000/(min_counter+1));
-							for (i=0;i<Num_Of_company-1;i++){
-								if (enemy_price[i]==Lowest_price_to_sell){
-									profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company+(1000/(min_counter+1)));
-									quantity_of_enemy[i] = 1000/Num_Of_company+(1000/(min_counter+1));
-								}
-								else{
-									profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company);
-									quantity_of_enemy[i]= 1000/Num_Of_company;
-								}
-							}
-						}
-						else
-						{
-							profit = (price-100)*(NumOfNonLoyalCus+1000/Num_Of_company);
-							quantity += NumOfNonLoyalCus
-							for (i=0;i<Num_Of_company-1;i++){
-								profit_of_enemy[i] = (enemy_price[i]-100)*(1000/Num_Of_company);
-								quantity_of_enemy[i] = 1000/Num_Of_company;
-							}
-						}
-					}
-					
-					record['round'+counter.toString()+'_quantity'] = quantity;
-					record['round'+counter.toString()+'_profit'] = profit;
-					for (i = 0; i<Num_Of_company-1;i++){
-						record['round'+counter.toString()+'_quantity_of_enemy '+(i+1).toString()] = quantity_of_enemy[i];
-						record['round'+counter.toString()+'_profit_of_enemy '+(i+1).toString()] = profit_of_enemy[i];
-					}
-					
-					//===============outp ut the result===============
-					if (profit>0){
-						$( "#result"+counter.toString() ).append( "恭喜你賣出了"+quantity+" 個商品，總共賺了 "+profit+" 元"+"<br>");
-					}
-					else
-					{
-						if(profit == 0)
-						{
-							$( "#result"+counter.toString() ).append( "你賣出了 "+quantity+" 個商品，不賺不賠"+"<br>");
-						}
-						else
-						{
-							profit = profit*(-1)
-							//$( "#result"+counter ).append( "你賣出了 "+quantity+" 個商品，你賠了 "+profit+" 元");
-							$( "#result"+counter.toString() ).append( "你賣出了 "+quantity+" 個商品，你賠了 "+profit+" 元"+"<br>");
-						}
-					}
-					for (i = 0; i<Num_Of_company-1;i++){
-						if (profit_of_enemy[i]>0){
-						$( "#result"+counter.toString() ).append("對手"+(i+1).toString()+"出價"+enemy_price[i]+"元，賣出了"+quantity_of_enemy[i]+"個商品，賺了"+profit_of_enemy[i]+"元"+"<br>");
-						}
-						else{
-							if (profit_of_enemy[i]==0){
-								$( "#result"+counter.toString() ).append("對手"+(i+1).toString()+"出價"+enemy_price[i]+"元，賣出了"+quantity_of_enemy[i]+"個商品，不賺不賠"+"<br>");
-							}
-							else{
-								profit_of_enemy[i] = profit_of_enemy[i]*(-1);
-								$( "#result"+counter.toString() ).append("對手"+(i+1).toString()+"出價"+enemy_price[i]+"元，賣出了"+quantity_of_enemy[i]+"個商品，陪了"+profit_of_enemy[i]+"元"+"<br>");
-							}
-						}
-					}
-					
-					$( "#output"+counter.toString()).css("display", "inline-block");
+					$( "#result" ).append( "進入第三階段，NBC決定以 "+CBS_price+" 萬元與你成交！");
 				}
+				second_round();
+			});
+			
+			
+			$( "#CBS_reject" ).click(function() {
+				record['round_1_step_2'] = 0;
+				disable();
+				$( "#result" ).append( "談判破裂，你沒有達成任何協議，賺了 <div class='price'>0 </div> 元。");
+				second_round()
+			});
 		}
-		function priceTranformer(seed,Num_Of_company,NumOfNonLoyalCus){
-			seed = seed/100;
-			var temp1 = Num_Of_company * NumOfNonLoyalCus*Math.pow((1-seed),(Num_Of_company-1));
-			var temp2 = 2000-NumOfNonLoyalCus;
-			var price = (200*temp2+100*temp1)/(temp1+temp2)
-			return price
-		}
+		
 		function disable(){
 			$(':input').prop('disabled', true);
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 			//$('#NBC_reject').prop('disabled', true);
 		}
+		
+		function second_round()
+		{
+			$( "#result" ).append( "</br> <button class='btn btn-primary' id='next'>進入情境二</button>");
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+			$( "#next" ).click(function() {
+				alert("準備好了嗎? 準備進入情境二");
+				sec();
+			});
+
+
+		}
+		function sec(){
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+			$("#ROFR_1").append("<hr>");
+			var max_2 = 2;
+			var min_2 = 100;
+			NBC_price_2 = Math.floor(Math.random() * (max_2 - min_2 + 1)) + min_2;
+			
+			record['NBC_price_2'] = NBC_price_2;
+			$( "#ROFR_2" ).css("display", "block");
+			$( "#NBC_price_2" ).append( "第一階段：NBC出價"+NBC_price_2+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			
+			$( ".CBS_Bu_2" ).css("display", "none");
+			$( ".NBC_Bu_2" ).prop('disabled', false);
+			
+			$( "#NBC_accept_2" ).click(function() {
+				record['round_2_step_1'] = 1;
+				$( "#result_2" ).append( "<br/>交易成立，賺了 <div class='price'>"+NBC_price_2+"</div> 萬元。");
+				disable();
+				record_result();
+			});
+			
+			$( "#NBC_reject_2" ).click(function() {
+				record['round_2_step_1'] = 0;
+				disable();
+				
+				// and the formula is:
+				var min_2_2 = 1
+				var max_2_2 = NBC_price_2
+				CBS_price_2 = Math.floor(Math.random() * (max_2_2 - min_2_2 + 1)) + min_2_2;
+				record['CBS_price_2'] = CBS_price_2;
+				$( ".CBS_Bu_2" ).css("display", " inline-block");
+				$( ".CBS_Bu_2" ).prop('disabled', 0);
+				$( "#CBS_price_2" ).append( "第二階段：CBS出價"+CBS_price_2+"萬美金。<br/>此階段你可以選擇接受或拒絕");
+			});
+			
+			$( "#CBS_accept_2" ).click(function() {
+				record['round_2_step_2'] = 1;
+				disable();
+				$( "#result_2" ).append( "恭喜！你與CBS的合約成立，賺了 <div class='price'>"+CBS_price_2+"</div> 萬元。");
+				record_result();
+			});
+			$( "#CBS_reject_2" ).click(function() {
+				record['round_2_step_2'] = 0;
+				disable();
+				$( "#result_2" ).append( "談判破裂，你什麼都沒賺到！發現優先權其實不一定是壞事了嗎？");
+				record_result();
+			});
+		}
+
+		$( "#reset" ).click(function() {
+			location.reload();
+		});
+		
+		// if (window.performance) {
+		//   console.info("window.performance work's fine on this browser");
+		// }
+		if (performance.navigation.type == 1) {
+		    console.info( "This page is reloaded" );
+		    if ($.cookie('ifstart')=='true'){
+		    	$( "#get_start" ).trigger( "click" );
+		    }		    
+		} else {
+		    console.info( "This page is not reloaded");
+		    $.cookie('ifstart', false);
+		}
+
 		function record_result()
 		{
+			$('#reset').css('display','inline-block')
+			$('#reset').prop('disabled', false);
+			$( "#result_2" ).append( "<hr>");
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				
 			console.log(record);
+
+			console.log("after parse");
+
 			var form_data = new FormData();
+
 			for ( var key in record ) {
-			    form_data.append(key, record[key]);
+			    form_data.append(String(key), record[key]);
 			}
 			jQuery(document).ajaxSend(function(event, xhr, settings) {
 			    function getCookie(name) {
@@ -420,8 +341,9 @@
 			        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
 			    }
 			});
+			console.log("ajax")
 			$.ajax({
-			    url         : 'http://140.112.107.55:8000/api/Price_War/',
+			    url         : 'http://140.112.107.55:8000/api/ROFR/',
 			    data        : form_data,
 			    processData : false,
 			    contentType : false,
@@ -429,7 +351,61 @@
 			}).done(function(data){
 			    console.log("add success")
 			});
+			
 		}
 	</script>
+	<style>
+		body{
+        	background-color: whitesmoke;
+        	font-size: 20px;
+        	line-height: 40px;
+    	}
 
+    	h1{
+    		text-align: center;
+    		font-size: 48px;
+    		width: 100%;
+    	}
+    	button{
+    		margin-top: 20px;
+    		margin-bottom: 20px;
+    	}
+		.CBS_Bu, #ROFR_2, .CBS_Bu_2{
+			display:none;
+		}
+		.container{
+			margin-top:5%;
+		}
+		#game{
+			display:none;
+			height:300px;
+			width: 75%;
+  			margin: 0 auto;
+		}
+		#start{
+			width: 75%;
+  			margin: 0 auto;
+  			padding-left: 8%;
+		}
+		#ROFR_1{
+			padding-left:0;
+		}
+		.price{
+			color:red;
+			display: inline;
+		}
+		#reset{
+			display:none;
+		}
+		#result_2{
+			margin-bottom: 100px;
+		}
+		#start_div{
+			margin-bottom: 50px;
+			text-align: center;
+		}
+		
+
+    </style>
 </html>
+
