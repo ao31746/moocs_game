@@ -50,12 +50,11 @@
 				</p>
 
 				<br/>
-				<button class='btn btn-primary' id='start'>閱讀完畢，準備開始</button>
+				<div id='start_div'>
+					<button class='btn btn-primary' id='start'>閱讀完畢，準備開始</button>
+				</div>
+				
 
-			
-
-			<p></p>
-			<p></p>
 
 			<div class="row">
 				<div id = input1 class="col-8">
@@ -63,19 +62,15 @@
 						情境一：
 					</h2>
 					<p>市場內共有2家廠商，每人有500名忠實客戶。</p>
-					<p></p>
-					<label for="example-text-input" class="col-2 col-form-label">出價:</label>
+					<label for="example-text-input" class="col-8 col-form-label">出價:</label>
 
-			  		<div class="col-3">
+			  		<div class="col-8">
 						<input class="form-control" type="number" placeholder="價格(1~200萬)" id="price1" min="1" max="200">
-			  			<p></p>
 			  			<button class='btn btn-primary' id='confirm1'>確認</button>
-			  			<p></p>
 			  		</div>
 			  		<div style="margin-bottom: 20px;"></div>
 				</div>
 				
-
 				<div id = output1 class="col-8">
 					<div id="result1"></div>
 					<button class='btn btn-primary' id='again1'> 再玩一次</button>
@@ -84,19 +79,15 @@
 				</div>
 
 				<div id = input2 class="col-8">
-					<p></p>
 					<h2>
 						情境二：
 					</h2>
 					<p>市場內共有4家廠商，每人有250名忠實客戶。</p>
-					<p></p>
-					<label for="example-text-input" class="col-2 col-form-label">出價:</label>
+					<label for="example-text-input" class="col-8 col-form-label">出價:</label>
 
-			  		<div class="col-3">
+			  		<div class="col-8">
 						<input class="form-control" type="number" placeholder="價格(1~200萬)" id="price2" min="1" max="200">
-			  			<p></p>
 			  			<button class='btn btn-primary' id='confirm2'>確認</button>
-			  			<p></p>
 			  		</div>
 			  		<div style="margin-bottom: 20px;"></div>
 				</div>
@@ -111,22 +102,15 @@
 				
 
 				<div id = input3 class="col-8">
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
 					<h2>
 						情境三：
 					</h2>
 					<p>市場內共有8家廠商，每人有125名忠實客戶。</p>
-					<p></p>
-					<label for="example-text-input" class="col-2 col-form-label">出價:</label>
+					<label for="example-text-input" class="col-8 col-form-label">出價:</label>
 
-			  		<div class="col-3">
+			  		<div class="col-8">
 						<input class="form-control" type="number" placeholder="價格(1~200萬)" id="price3" min="1" max="200">
-			  			<p></p>
 			  			<button class='btn btn-primary' id='confirm3'>確認</button>
-			  			<p></p>
 			  		</div>
 			  		<div style="margin-bottom: 20px;"></div>
 				</div>
@@ -450,6 +434,11 @@
 
 	</script>
 	<style>
+		body{
+			background-color: whitesmoke;
+			font-size: 20px;
+			line-height:40px;
+		}
 		#input1,#output1,#input2,#output2,#input3,#output3{
 			display:none;
 		}
@@ -462,6 +451,18 @@
 		.WordSection1{
 			width: 75%;
   			margin: 0 auto;
+		}
+		h1{
+			text-align: center;
+			font-size: 48px;
+			width: 100%
+		}
+		#start_div{
+			margin-bottom: 50px;
+			text-align: center;
+		}
+		button{
+			margin-top: 20px
 		}
     </style>
 </html>

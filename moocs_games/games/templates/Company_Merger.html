@@ -18,18 +18,16 @@
 			<br/>
 			<p>在這個情境裡，我有一家公司正在尋找買家，而你是唯一的可能買家，亦即沒有人與你競爭。另外，你有技術在手，只要買下公司，就能改善公司生產流程，使生產力增加，利潤也會因此增加50%。假設我手裡利潤是萬，在你手裡利潤就會變成75萬，依此類推。但是，即使你確知能提升公司生產力50%，卻不知道公司目前生產力是多少。然而，你知道這家公司在我手上只可能產生0~100萬的利潤，這個利潤是在0~100萬的區間中均勻分布的。
 			</p>
-			<br/>
 			<p>
 			你能出價的區間在0~150萬，0就代表不買。你出價後，我會根據公司的實際估值資訊決定賣或不賣。
 			</p>
 
-			<button class='btn btn-primary' id="start">閱讀完畢，準備開始</button>
+			<div id = 'start_div'>
+				<button class='btn btn-primary' id="start">閱讀完畢，準備開始</button>
+			</div>
 
-			<p></p>
-			<p></p>
 
-			<div style="margin-bottom: 90px;"></div>
-			<div class="row">
+			<div >
 
 				<div id = ROFR_1 class="col-sm-6">
 					<h2>
@@ -437,6 +435,16 @@
 		//===================End of Graph========================
 	</script>
 	<style>
+		body{
+			background-color: whitesmoke;
+			font-size: 20px;
+			line-height:40px;
+		}
+		h1{
+			text-align: center;
+			font-size: 48px;
+			width: 100%
+		}
 		#ROFR_1,#ROFR_2,#result,#again{
 			display:none;
 		}
@@ -452,6 +460,18 @@
 		}
 		#result1{
 			 width:300px;
+		}
+		button{
+			margin-top: 20px
+			margin-bottom: 50px;
+		}
+		#start_div{
+			margin-bottom: 50px;
+			text-align: center;
+		}
+		h2{
+			margin-top: 50px;
+			text-align: center;
 		}
     </style>
 </html>
